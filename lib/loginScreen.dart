@@ -20,78 +20,80 @@ class LoginScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Login',
+                      style: Theme.of(context).textTheme.headline4,
+                    )
+                  ],
+                ),
+              ),
+              Row(
                 children: [
-                  Text(
-                    'Login',
-                    style: Theme.of(context).textTheme.headline4,
-                  )
+                  Flexible(
+                    child: TextField(
+                      onChanged: (value) {
+                        palyer1Name = value;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Player 1',
+                        suffixText: '  (X)',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ),
-            Row(
-              children: [
-                Flexible(
-                  child: TextField(
-                    onChanged: (value) {
-                      palyer1Name = value;
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'Player 1',
-                      suffixText: '  (X)',
-                      border: OutlineInputBorder(),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Flexible(
+                    child: TextField(
+                      onChanged: (value) {
+                        palyer2Name = value;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Player 2',
+                        suffixText: ' (O)',
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Flexible(
-                  child: TextField(
-                    onChanged: (value) {
-                      palyer2Name = value;
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'Player 2',
-                      suffixText: ' (O)',
-                      border: OutlineInputBorder(),
+                ],
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              GameScreen.routeName,
+                              arguments: PlayerDataArg(palyer1Name, palyer2Name)
+                            );
+                          },
+                          child: Text('Go To Game')),
                     ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            GameScreen.routeName,
-                            arguments: PlayerDataArg(palyer1Name, palyer2Name)
-                          );
-                        },
-                        child: Text('Go To Game')),
-                  ),
-                )
-              ],
-            )
-          ],
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
